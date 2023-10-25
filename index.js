@@ -11,7 +11,7 @@ document
 //Funções
 function showQuestion() {
   if (questions[currentQuestion]) {
-
+let q = questions[currentQuestion];
     // Criar variável para a barra de progresso baseado na divisão entre número questão atual e quantidade de questões vezes 100. Use a função Math.floor para arredondar.
     let larguraBarra = Math.floor((currentQuestion / questions.length) * 100);
 
@@ -52,9 +52,9 @@ function showQuestion() {
   }
 }
 
-function optionClickEvent(e) {
+function optionClickEvent(event) {
   // Verifique qual questão foi clicada recuperando o atributo data-op. Use parseInt para formatar o atributo. Atribua o valor a uma variável.s
-  let questaoClicada = parseInt(e.target.getAttribute('data-op'));
+  let questaoClicada = parseInt(event.target.getAttribute('data-op'));
 
   // Se a resposta clicada foi a correta, incremente a variável correctAnswers
   if (question[currentQuestion].answer === questaoClicada) {
