@@ -11,7 +11,7 @@ document
 //Funções
 function showQuestion() {
   if (questions[currentQuestion]) {
-let q = questions[currentQuestion];
+    let q = questions[currentQuestion];
     // Criar variável para a barra de progresso baseado na divisão entre número questão atual e quantidade de questões vezes 100. Use a função Math.floor para arredondar.
     let larguraBarra = Math.floor((currentQuestion / questions.length) * 100);
 
@@ -47,7 +47,9 @@ let q = questions[currentQuestion];
     document.querySelectorAll(".options .option").forEach((item) => {
       item.addEventListener("click", optionClickEvent);
     });
+
   } else {
+    // Chame a função finishQuiz
     finishQuiz()
   }
 }
@@ -57,7 +59,7 @@ function optionClickEvent(event) {
   let questaoClicada = parseInt(event.target.getAttribute('data-op'));
 
   // Se a resposta clicada foi a correta, incremente a variável correctAnswers
-  if (question[currentQuestion].answer === questaoClicada) {
+  if (questions[currentQuestion].answer === questaoClicada) {
 
     // Incremente a variável currentQuestion
     correctAnswers++
@@ -69,23 +71,17 @@ function optionClickEvent(event) {
 }
 
 function finishQuiz() {
-    let questionFinish = document.querySelector(".questionArea")
-
     // Criar variável de pontos baseado na divisão entre respostas corretas e quantidade de questões. Use a função Math.floor para arredondar.
-    let pontosQuiz = Math.floor(correctAnswers / 10);
-
-    // Inserir a pontuação em .scorePct e o texto em .scoreText2
-    let pontosFinish = document.getElementsByClassName(".scorePct");
-    pontosFinish.innerHTML = `${pontosFinish}`;
-    let textoFinish = document.getElementsByClassName(".scoreText2");
-    textoFinish.innerHTML = `${textoFinish}`;
+    let pontosQuiz = Math.floor((correctAnswers / questions.length)*100);
 
     // Usar condicional if e condicionais <, <=, >, >=
-    if (pontosQuiz < 20) {
-        textoFinish.innerHTML = "Parabéns! Você acertou 20%! Refaça!";
+    if (pontosQuiz <= 25) {
+        // Inserir a pontuação em .scorePct e o texto em .scoreText2
+        document.querySelector(".scorePct").innerHTML = `Acertou ${pontosQuiz}%`;
+        document.querySelector(".scoreText2").innerHTML = `Péssimo! Você acertou apenas ${pontosQuiz}%! Refaça!`;
 
         // Implementar condicionais para inserir mensagem e cor do placar de acordo com a pontuação.
-        document.querySelector(".areaScore").style.backgroundColor = 'pink';
+        document.querySelector(".scoreArea").style.backgroundColor = 'pink';
 
         // Ocultar a .questionArea e exibir a .scoreArea
         document.querySelector(".questionArea").style.display = 'none';
@@ -95,33 +91,37 @@ function finishQuiz() {
         document.querySelector(".progress--bar").style.width = '100%';
     }
 
-    if (pontosQuiz < 40) {
-        textoFinish.innerHTML = `Parabéns! Você acertou apenas ${pontosQuiz}%!`
-        document.querySelector(".areaScore").style.backgroundColor = 'blue';
+    if (pontosQuiz <= 45) {
+        document.querySelector(".scorePct").innerHTML = `Acertou ${pontosQuiz}%`;
+        document.querySelector(".scoreText2").innerHTML = `Que pena! Você acertou apenas ${pontosQuiz}%!`
+        document.querySelector(".scoreArea").style.backgroundColor = 'blue';
         document.querySelector(".questionArea").style.display = 'none';
         document.querySelector(".scoreArea").style.display = 'block';
         document.querySelector(".progress--bar").style.width = '100%';
     }
 
-    if (pontosQuiz < 60) {
-        textoFinish.innerHTML = `Parabéns! Você acertou ${pontosQuiz}%!`
-        document.querySelector(".areaScore").style.backgroundColor = 'green';
+    if (pontosQuiz <= 65) {
+        document.querySelector(".scorePct").innerHTML = `Acertou ${pontosQuiz}%`;
+        document.querySelector(".scoreText2").innerHTML = `Parabéns! Você acertou ${pontosQuiz}%!`
+        document.querySelector(".scoreArea").style.backgroundColor = 'green';
         document.querySelector(".questionArea").style.display = 'none';
         document.querySelector(".scoreArea").style.display = 'block';
         document.querySelector(".progress--bar").style.width = '100%';
     }
 
-    if (pontosQuiz < 80) {
-        textoFinish.innerHTML = `Meus parabéns! Você acertou ${pontosQuiz}%!`
-        document.querySelector(".areaScore").style.backgroundColor = 'yellow';
+    if (pontosQuiz <= 85) {
+        document.querySelector(".scorePct").innerHTML = `Acertou ${pontosQuiz}%`;
+        document.querySelector(".scoreText2").innerHTML = `Meus parabéns! Você acertou ${pontosQuiz}%!`
+        document.querySelector(".scoreArea").style.backgroundColor = 'yellow';
         document.querySelector(".questionArea").style.display = 'none';
         document.querySelector(".scoreArea").style.display = 'block';
         document.querySelector(".progress--bar").style.width = '100%';
     }
 
-    if (pontosQuiz >= 80) {
-        textoFinish.innerHTML = `Meus parabéns! Você acertou ${pontosQuiz}%! Muito bem!`;
-        document.querySelector(".areaScore").style.backgroundColor = 'red';
+    if (pontosQuiz > 85) {
+        document.querySelector(".scorePct").innerHTML = `Acertou ${pontosQuiz}%`;
+        document.querySelector(".scoreText2").innerHTML = `Meus parabéns! Você acertou ${pontosQuiz}%! Muito bem!`;
+        document.querySelector(".scoreArea").style.backgroundColor = 'blueviolet';
         document.querySelector(".questionArea").style.display = 'none';
         document.querySelector(".scoreArea").style.display = 'block';
         document.querySelector(".progress--bar").style.width = '100%';
@@ -132,7 +132,7 @@ function resetEvent() {
     // Redefina os valores de correctAnswers e currentQuestion para 0
     correctAnswers = 0;
     currentQuestion = 0;
-    showQuestion()
+
     // Chame a função showQuestion
     showQuestion()
 }
