@@ -11,7 +11,7 @@
     align-items: center;
     flex-direction: column;
     background-color: rgb(28, 27, 27);
-    /* font-family: ; */
+    font-family: 'Poppins', sans-serif;
   }
   
   h1 {

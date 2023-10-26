@@ -73,9 +73,10 @@ function optionClickEvent(event) {
 function finishQuiz() {
     // Criar variável de pontos baseado na divisão entre respostas corretas e quantidade de questões. Use a função Math.floor para arredondar.
     let pontosQuiz = Math.floor((correctAnswers / questions.length)*100);
-
+    console.log(pontosQuiz)
+    
     // Usar condicional if e condicionais <, <=, >, >=
-    if (pontosQuiz <= 25) {
+    if (pontosQuiz <= 20) {
         // Inserir a pontuação em .scorePct e o texto em .scoreText2
         document.querySelector(".scorePct").innerHTML = `Acertou ${pontosQuiz}%`;
         document.querySelector(".scoreText2").innerHTML = `Péssimo! Você acertou apenas ${pontosQuiz}%! Refaça!`;
@@ -91,7 +92,7 @@ function finishQuiz() {
         document.querySelector(".progress--bar").style.width = '100%';
     }
 
-    if (pontosQuiz <= 45) {
+    if (pontosQuiz > 20 && pontosQuiz <= 40) {
         document.querySelector(".scorePct").innerHTML = `Acertou ${pontosQuiz}%`;
         document.querySelector(".scoreText2").innerHTML = `Que pena! Você acertou apenas ${pontosQuiz}%!`
         document.querySelector(".scoreArea").style.backgroundColor = 'blue';
@@ -100,7 +101,7 @@ function finishQuiz() {
         document.querySelector(".progress--bar").style.width = '100%';
     }
 
-    if (pontosQuiz <= 65) {
+    if (pontosQuiz > 40 && pontosQuiz <= 60) {
         document.querySelector(".scorePct").innerHTML = `Acertou ${pontosQuiz}%`;
         document.querySelector(".scoreText2").innerHTML = `Parabéns! Você acertou ${pontosQuiz}%!`
         document.querySelector(".scoreArea").style.backgroundColor = 'green';
@@ -109,7 +110,7 @@ function finishQuiz() {
         document.querySelector(".progress--bar").style.width = '100%';
     }
 
-    if (pontosQuiz <= 85) {
+    if (pontosQuiz > 60 && pontosQuiz <= 80) {
         document.querySelector(".scorePct").innerHTML = `Acertou ${pontosQuiz}%`;
         document.querySelector(".scoreText2").innerHTML = `Meus parabéns! Você acertou ${pontosQuiz}%!`
         document.querySelector(".scoreArea").style.backgroundColor = 'yellow';
@@ -118,7 +119,7 @@ function finishQuiz() {
         document.querySelector(".progress--bar").style.width = '100%';
     }
 
-    if (pontosQuiz > 85) {
+    if (pontosQuiz > 80) {
         document.querySelector(".scorePct").innerHTML = `Acertou ${pontosQuiz}%`;
         document.querySelector(".scoreText2").innerHTML = `Meus parabéns! Você acertou ${pontosQuiz}%! Muito bem!`;
         document.querySelector(".scoreArea").style.backgroundColor = 'blueviolet';
